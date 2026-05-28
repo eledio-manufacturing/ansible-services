@@ -7,4 +7,4 @@ Skips install if binary already present.
 
 | Variable | Default | Description |
 |---|---|---|
-| `uv_install_dir` | `/usr/local/bin` | Directory to install uv binary into |
+| `install_uv_install_dir` | `/usr/local/bin` | Directory to install uv binary into |

@@ -12,10 +12,9 @@ license:
   - GPL-2.0-or-later
 
 tags:
-  - debian
-  - raspberry
-  - iot
-  - manufacturing
+  - infrastructure
+  - linux
+  - tools
 
 dependencies: {}
 

@@ -72,7 +72,7 @@ ansible-galaxy collection install eledio-services-*.tar.gz
 
 | Variable | Default | Description |
 |---|---|---|
-| `uv_install_dir` | `/usr/local/bin` | Directory to install uv binary into |
+| `install_uv_install_dir` | `/usr/local/bin` | Directory to install uv binary into |
 
 ### vpn
 

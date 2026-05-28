@@ -1,2 +1,2 @@
 ---
-uv_install_dir: /usr/local/bin
+install_uv_install_dir: /usr/local/bin

@@ -16,14 +16,17 @@
     group: "{{ label_printer_user }}"
 
 - name: Clone or update service repository
+  become: true
   become_user: "{{ label_printer_user }}"
   ansible.builtin.git:
     repo: "https://{{ label_printer_git_user }}:{{ label_printer_git_token }}@github.com/eledio-manufacturing/printer-tsc.git"
     dest: "{{ label_printer_install_dir }}"
+    version: main
     force: true
   notify: Restart printer
 
 - name: Sync python dependencies
+  become: true
   become_user: "{{ label_printer_user }}"
   ansible.builtin.command:
     cmd: /usr/local/bin/uv sync
@@ -33,6 +36,7 @@
   notify: Restart printer
 
 - name: Deploy station config
+  become: true
   become_user: "{{ label_printer_user }}"
   ansible.builtin.copy:
     content: "{{ label_printer_config_content }}"

@@ -1,0 +1,22 @@
+---
+- name: Install openvpn
+  ansible.builtin.apt:
+    name: openvpn
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Deploy client configuration
+  ansible.builtin.copy:
+    content: "{{ vpn_config_content }}"
+    dest: "/etc/openvpn/client/{{ vpn_config_name }}.conf"
+    owner: root
+    group: root
+    mode: '0600'
+  notify: Restart openvpn
+
+- name: Enable and start openvpn client service
+  ansible.builtin.systemd:
+    name: "openvpn-client@{{ vpn_config_name }}"
+    enabled: true
+    state: started

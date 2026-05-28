@@ -1,0 +1,3 @@
+---
+vpn_config_name: client
+# vpn_config_content: ""  # required — provide in playbook (use ansible-vault for sensitive data)

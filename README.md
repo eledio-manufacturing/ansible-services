@@ -7,6 +7,7 @@ Collection of roles for deploying and managing services on Debian-based systems
 
 | Role | Description |
 |---|---|
+| `eledio.services.common` | Base system setup — apt update and essential packages |
 | `eledio.services.install_uv` | Install [uv](https://github.com/astral-sh/uv) Python package manager system-wide |
 | `eledio.services.vpn` | Install OpenVPN and deploy client configuration |
 | `eledio.services.st_link` | Deploy ST-Link udev rules for USB access |
@@ -53,11 +54,18 @@ ansible-galaxy collection install eledio-services-*.tar.gz
 - hosts: raspberries
   become: true
   roles:
+    - eledio.services.common
     - eledio.services.install_uv
     - eledio.services.vpn
 ```
 
 ## Role variables
+
+### common
+
+| Variable | Default | Description |
+|---|---|---|
+| `common_packages` | see defaults | List of apt packages to install — extend per playbook |
 
 ### install_uv
 

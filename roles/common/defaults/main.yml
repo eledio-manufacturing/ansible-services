@@ -1,0 +1,10 @@
+---
+common_packages:
+  - python3
+  - python3-pip
+  - git
+  - i2c-tools
+  - python3-smbus
+  - curl
+  - cifs-utils
+  - libnss-myhostname

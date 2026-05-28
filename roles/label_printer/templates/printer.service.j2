@@ -1,0 +1,14 @@
+[Unit]
+Description=Label printer service
+After=network.target
+
+[Service]
+Type=simple
+User={{ label_printer_user }}
+WorkingDirectory={{ label_printer_install_dir }}
+ExecStart={{ label_printer_install_dir }}/.venv/bin/python main.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

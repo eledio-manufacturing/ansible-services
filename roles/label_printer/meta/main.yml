@@ -1,0 +1,15 @@
+galaxy_info:
+  author: eledio
+  description: Deploy and run the label printer service (printer-tsc)
+  license: GPL-2.0-or-later
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Debian
+      versions:
+        - all  # includes Raspberry Pi OS (bookworm/bullseye)
+  galaxy_tags:
+    - printer
+    - mqtt
+    - manufacturing
+
+dependencies: []

@@ -1,0 +1,54 @@
+---
+- name: Install required packages
+  ansible.builtin.apt:
+    name:
+      - git
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Ensure install directory exists with correct owner
+  ansible.builtin.file:
+    path: "{{ label_printer_install_dir }}"
+    state: directory
+    recurse: true
+    owner: "{{ label_printer_user }}"
+    group: "{{ label_printer_user }}"
+
+- name: Clone or update service repository
+  become_user: "{{ label_printer_user }}"
+  ansible.builtin.git:
+    repo: "https://{{ label_printer_git_user }}:{{ label_printer_git_token }}@github.com/eledio-manufacturing/printer-tsc.git"
+    dest: "{{ label_printer_install_dir }}"
+    force: true
+  notify: Restart printer
+
+- name: Sync python dependencies
+  become_user: "{{ label_printer_user }}"
+  ansible.builtin.command:
+    cmd: /usr/local/bin/uv sync
+    chdir: "{{ label_printer_install_dir }}"
+  register: label_printer_uv_sync
+  changed_when: "'Installed' in label_printer_uv_sync.stdout or 'Updated' in label_printer_uv_sync.stdout"
+  notify: Restart printer
+
+- name: Deploy station config
+  become_user: "{{ label_printer_user }}"
+  ansible.builtin.copy:
+    content: "{{ label_printer_config_content }}"
+    dest: "{{ label_printer_install_dir }}/config/config.yaml"
+    mode: '0600'
+  notify: Restart printer
+
+- name: Deploy systemd service
+  ansible.builtin.template:
+    src: printer.service.j2
+    dest: /etc/systemd/system/printer.service
+    mode: '0644'
+  notify: Restart printer
+
+- name: Enable and start service
+  ansible.builtin.systemd:
+    name: printer
+    state: started
+    enabled: true

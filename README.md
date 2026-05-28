@@ -11,6 +11,7 @@ Collection of roles for deploying and managing services on Debian-based systems
 | `eledio.services.install_uv` | Install [uv](https://github.com/astral-sh/uv) Python package manager system-wide |
 | `eledio.services.vpn` | Install OpenVPN and deploy client configuration |
 | `eledio.services.st_link` | Deploy ST-Link udev rules for USB access |
+| `eledio.services.label_printer` | Deploy and run the label printer service (printer-tsc) |
 
 ## Installation
 
@@ -85,3 +86,13 @@ See `roles/vpn/README.md` for full documentation on supplying the VPN config.
 ### st_link
 
 No variables. Deploys `/etc/udev/rules.d/99-stlink.rules` and reloads udev.
+
+### label_printer
+
+| Variable | Required | Default | Description |
+|---|---|---|---|
+| `label_printer_git_user` | yes | — | GitHub username for cloning printer-tsc |
+| `label_printer_git_token` | yes | — | GitHub token for cloning printer-tsc (use ansible-vault) |
+| `label_printer_config_content` | yes | — | Full content of `config/config.yaml` (use ansible-vault) |
+| `label_printer_install_dir` | no | `/srv/printer` | Service installation directory |
+| `label_printer_user` | no | `pi` | OS user that owns and runs the service |

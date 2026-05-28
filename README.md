@@ -9,6 +9,7 @@ Collection of roles for deploying and managing services on Debian-based systems
 |---|---|
 | `eledio.services.install_uv` | Install [uv](https://github.com/astral-sh/uv) Python package manager system-wide |
 | `eledio.services.vpn` | Install OpenVPN and deploy client configuration |
+| `eledio.services.st_link` | Deploy ST-Link udev rules for USB access |
 
 ## Installation
 
@@ -72,3 +73,7 @@ ansible-galaxy collection install eledio-services-*.tar.gz
 | `vpn_config_name` | no | `client` | Config name — filename and systemd instance name |
 
 See `roles/vpn/README.md` for full documentation on supplying the VPN config.
+
+### st_link
+
+No variables. Deploys `/etc/udev/rules.d/99-stlink.rules` and reloads udev.

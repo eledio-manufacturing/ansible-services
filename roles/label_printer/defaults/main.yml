@@ -1,6 +1,4 @@
 ---
 label_printer_install_dir: /srv/printer
 label_printer_user: pi
-# label_printer_git_user: ""      # required — provide in playbook (use ansible-vault)
-# label_printer_git_token: ""     # required — provide in playbook (use ansible-vault)
 # label_printer_config_content: ""  # required — full content of config/config.yaml (use ansible-vault)

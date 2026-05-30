@@ -19,7 +19,7 @@
   become: true
   become_user: "{{ label_printer_user }}"
   ansible.builtin.git:
-    repo: "https://{{ label_printer_git_user }}:{{ label_printer_git_token }}@github.com/eledio-manufacturing/printer-tsc.git"
+    repo: "https://github.com/eledio-manufacturing/printer-tsc.git"
     dest: "{{ label_printer_install_dir }}"
     version: main
     force: true

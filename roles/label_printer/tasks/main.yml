@@ -25,6 +25,14 @@
     force: true
   notify: Restart printer
 
+- name: Fix uv cache ownership for service user
+  ansible.builtin.file:
+    path: "/home/{{ label_printer_user }}/.cache/uv"
+    state: directory
+    owner: "{{ label_printer_user }}"
+    group: "{{ label_printer_user }}"
+    recurse: true
+
 - name: Check venv python executable by service user
   become: true
   become_user: "{{ label_printer_user }}"
@@ -55,11 +63,11 @@
   notify: Restart printer
 
 - name: Deploy station config
-  become: true
-  become_user: "{{ label_printer_user }}"
   ansible.builtin.copy:
     content: "{{ label_printer_config_content }}"
     dest: "{{ label_printer_install_dir }}/config/config.yaml"
+    owner: "{{ label_printer_user }}"
+    group: "{{ label_printer_user }}"
     mode: '0600'
   notify: Restart printer
 

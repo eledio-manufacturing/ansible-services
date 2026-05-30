@@ -14,21 +14,14 @@
 - name: Install uv
   ansible.builtin.command: /tmp/uv-install.sh
   args:
-    creates: /root/.local/bin/uv
+    creates: "{{ install_uv_install_dir }}/uv"
   environment:
     INSTALLER_NO_MODIFY_PATH: "1"
+    UV_INSTALL_DIR: "{{ install_uv_install_dir }}"
   when: not install_uv_binary.stat.exists
 
 - name: Remove uv installer
   ansible.builtin.file:
     path: /tmp/uv-install.sh
     state: absent
-  when: not install_uv_binary.stat.exists
-
-- name: Copy uv to system bin directory
-  ansible.builtin.copy:
-    src: /root/.local/bin/uv
-    dest: "{{ install_uv_install_dir }}/uv"
-    mode: '0755'
-    remote_src: true
   when: not install_uv_binary.stat.exists

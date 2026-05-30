@@ -25,6 +25,23 @@
     force: true
   notify: Restart printer
 
+- name: Check venv python executable by service user
+  become: true
+  become_user: "{{ label_printer_user }}"
+  ansible.builtin.command:
+    cmd: "{{ label_printer_install_dir }}/.venv/bin/python --version"
+  register: label_printer_python_check
+  failed_when: false
+  changed_when: false
+  environment:
+    HOME: "/home/{{ label_printer_user }}"
+
+- name: Remove venv if python not accessible by service user
+  ansible.builtin.file:
+    path: "{{ label_printer_install_dir }}/.venv"
+    state: absent
+  when: label_printer_python_check.rc != 0
+
 - name: Sync python dependencies
   become: true
   become_user: "{{ label_printer_user }}"

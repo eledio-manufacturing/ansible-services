@@ -71,6 +71,12 @@
     mode: '0600'
   notify: Restart printer
 
+- name: Add service user to lp group for USB printer access
+  ansible.builtin.user:
+    name: "{{ label_printer_user }}"
+    groups: lp
+    append: true
+
 - name: Deploy systemd service
   ansible.builtin.template:
     src: printer.service.j2

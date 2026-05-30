@@ -31,6 +31,8 @@
   ansible.builtin.command:
     cmd: /usr/local/bin/uv sync
     chdir: "{{ label_printer_install_dir }}"
+  environment:
+    HOME: "/home/{{ label_printer_user }}"
   register: label_printer_uv_sync
   changed_when: "'Installed' in label_printer_uv_sync.stdout or 'Updated' in label_printer_uv_sync.stdout"
   notify: Restart printer

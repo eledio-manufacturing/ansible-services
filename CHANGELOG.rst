@@ -1,10 +1,22 @@
 ================================
-eledio_admin.services Change Log
+eledio.services Change Log
 ================================
 
 Unreleased
 ----------
 
+No changes yet.
+
+
+v1.1.2
+======
+
+Release Summary
+---------------
+Documentation and CI deployment improvements.
+
+Changes
+-------
 - Add MkDocs-based documentation site with per-role pages and contributing guide.
 - Add GitHub Actions workflow to build and deploy the documentation site to GitHub Pages.
 

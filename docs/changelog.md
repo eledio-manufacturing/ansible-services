@@ -2,6 +2,13 @@
 
 ## eledio_admin.services Change Log
 
+### Unreleased
+
+Changes in the current development branch:
+
+- Add MkDocs-based documentation site with per-role pages and contributing guide.
+- Add GitHub Actions workflow to build and deploy the documentation site to GitHub Pages.
+
 ### v1.0.0
 
 #### Release Summary

@@ -19,8 +19,7 @@ tags:
 dependencies: {}
 
 repository: https://github.com/eledio-manufacturing/ansible-services.git
-homepage: https://github.com/eledio-manufacturing/ansible-services
-website: https://eledio-manufacturing.github.io/ansible-services/
+homepage: https://eledio-manufacturing.github.io/ansible-services/
 issues: https://github.com/eledio-manufacturing/ansible-services/issues
 
 build_ignore:

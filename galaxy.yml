@@ -1,4 +1,4 @@
-namespace: eledio_admin
+namespace: eledio
 name: services
 version: 1.0.0
 readme: README.md

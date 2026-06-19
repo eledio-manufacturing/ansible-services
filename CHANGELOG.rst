@@ -5,10 +5,32 @@ eledio_admin.services Change Log
 Unreleased
 ----------
 
-Changes in the current development branch:
-
 - Add MkDocs-based documentation site with per-role pages and contributing guide.
 - Add GitHub Actions workflow to build and deploy the documentation site to GitHub Pages.
+
+
+v1.1.1
+======
+
+Release Summary
+---------------
+Patch release with metadata namespace fix.
+
+Changes
+-------
+- Update Galaxy namespace from ``eledio_admin`` to ``eledio``.
+
+
+v1.1.0
+======
+
+Release Summary
+---------------
+Fix for USB printer access in the `label_printer` role.
+
+Changes
+-------
+- Add service user to ``lp`` group for USB printer access in ``label_printer`` role.
 
 
 v1.0.0

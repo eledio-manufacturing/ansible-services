@@ -1,0 +1,18 @@
+site_name: eledio.services
+site_description: "Ansible collection 'eledio.services' — roles to deploy and manage services on Debian-based systems."
+repo_url: https://github.com/eledio-manufacturing/ansible-services
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - Roles:
+      - common: roles/common.md
+      - install_uv: roles/install_uv.md
+      - label_printer: roles/label_printer.md
+      - st_link: roles/st_link.md
+      - vpn: roles/vpn.md
+  - Plugins: plugins.md
+  - Contributing: contributing.md
+  - Changelog: changelog.md
+theme:
+  name: material

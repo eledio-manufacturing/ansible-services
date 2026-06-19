@@ -1,0 +1,15 @@
+# Role: label_printer
+
+Purpose
+
+Clones the `printer-tsc` service repository, syncs Python dependencies via `uv`, deploys station configuration and a systemd service unit.
+
+Variables
+
+| Variable | Required | Default | Description |
+|---|---|---|---|
+| `label_printer_config_content` | yes | — | Full content of `config/config.yaml` (use `ansible-vault`) |
+| `label_printer_install_dir` | no | `/srv/printer` | Service installation directory |
+| `label_printer_user` | no | `pi` | OS user that owns and runs the service |
+
+Defaults file: roles/label_printer/defaults/main.yml

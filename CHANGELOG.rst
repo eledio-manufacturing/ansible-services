@@ -8,6 +8,18 @@ Unreleased
 No changes yet.
 
 
+v1.1.4
+======
+
+Release Summary
+---------------
+Improve GitHub issue templates.
+
+Changes
+-------
+- Update GitHub issue templates.
+
+
 v1.1.2
 ======
 

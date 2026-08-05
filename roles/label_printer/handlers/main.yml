@@ -9,3 +9,12 @@
     name: printer
     state: restarted
   listen: Restart printer
+
+- name: Reload udev rules
+  ansible.builtin.command: udevadm control --reload-rules
+  changed_when: false
+  notify: Trigger udev
+
+- name: Trigger udev
+  ansible.builtin.command: udevadm trigger
+  changed_when: false

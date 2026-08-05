@@ -77,6 +77,13 @@
     groups: lp
     append: true
 
+- name: Deploy udev rule for Brother QL USB access
+  ansible.builtin.template:
+    src: 99-brother-ql.rules.j2
+    dest: /etc/udev/rules.d/99-brother-ql.rules
+    mode: '0644'
+  notify: Reload udev rules
+
 - name: Deploy systemd service
   ansible.builtin.template:
     src: printer.service.j2

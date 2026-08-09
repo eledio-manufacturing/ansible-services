@@ -62,6 +62,14 @@
   changed_when: "'Installed' in label_printer_uv_sync.stdout or 'Updated' in label_printer_uv_sync.stdout"
   notify: Restart printer
 
+- name: Ensure log directory exists with correct owner
+  ansible.builtin.file:
+    path: "{{ label_printer_log_dir }}"
+    state: directory
+    owner: "{{ label_printer_user }}"
+    group: "{{ label_printer_user }}"
+    mode: '0755'
+
 - name: Deploy station config
   ansible.builtin.copy:
     content: "{{ label_printer_config_content }}"

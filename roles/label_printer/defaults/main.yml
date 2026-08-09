@@ -1,4 +1,5 @@
 ---
 label_printer_install_dir: /srv/printer
 label_printer_user: pi
+label_printer_log_dir: /var/log/printer-tsc
 # label_printer_config_content: ""  # required — full content of config/config.yaml (use ansible-vault)

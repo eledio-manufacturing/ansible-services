@@ -5,7 +5,9 @@ eledio.services Change Log
 Unreleased
 ----------
 
-No changes yet.
+Changes
+-------
+- label_printer: precreate ``label_printer_log_dir`` (default ``/var/log/printer-tsc``), owned by ``label_printer_user``, for optional rotating file logging.
 
 
 v1.1.4

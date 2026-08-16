@@ -92,6 +92,18 @@
     mode: '0644'
   notify: Reload udev rules
 
+# ipp-usb is udev-activated (SYSTEMD_WANTS) on any USB printer-class interface, so it
+# restarts itself on every reconnect -- including the dev.reset() this service issues
+# before each print. It then holds an exclusive claim on the same USB device brother_ql
+# needs, causing "Resource busy" / unresponsive status queries. This service talks to
+# the printer directly over raw USB, never via CUPS/IPP, so ipp-usb serves no purpose
+# here -- mask it outright rather than just stopping it.
+- name: Mask ipp-usb (conflicts with raw USB access to Brother QL)
+  ansible.builtin.systemd:
+    name: ipp-usb
+    masked: true
+    state: stopped
+
 - name: Deploy systemd service
   ansible.builtin.template:
     src: printer.service.j2

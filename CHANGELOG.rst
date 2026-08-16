@@ -8,6 +8,18 @@ Unreleased
 No changes yet.
 
 
+v1.1.7
+======
+
+Release Summary
+---------------
+Fix USB conflict between ipp-usb and Brother QL label printer.
+
+Changes
+-------
+- label_printer: mask ``ipp-usb`` service to prevent it from claiming the Brother QL USB device and causing "Resource busy" errors.
+
+
 v1.1.6
 ======
 

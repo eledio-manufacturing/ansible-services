@@ -1,10 +1,47 @@
 ---
+- name: Show host facts
+  ansible.builtin.debug:
+    msg: >-
+      {{ ansible_facts['hostname'] | default(inventory_hostname) }},
+      {{ ansible_facts['all_ipv4_addresses'][0] | default('no IPv4') }},
+      {{ ansible_facts['distribution'] | default('unknown distro') }}
+      {{ ansible_facts['distribution_version'] | default('') }},
+      Linux {{ ansible_facts['kernel'] | default('unknown') }}
+  when: common_show_host_facts | bool
+
 - name: Update apt cache
   ansible.builtin.apt:
     update_cache: true
     cache_valid_time: 3600
 
+- name: Upgrade all packages
+  ansible.builtin.apt:
+    upgrade: dist
+  when: common_upgrade_packages | bool
+
 - name: Install system packages
   ansible.builtin.apt:
     name: "{{ common_packages }}"
     state: present
+
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: "{{ common_hostname }}"
+  when: common_hostname | length > 0
+
+- name: Ensure the old hostname isn't stuck in /etc/hosts
+  # Debian maps the hostname to 127.0.1.1 at install time; once renamed,
+  # that line would keep resolving the old name. libnss-myhostname (in the
+  # default common_packages) resolves the current hostname without it.
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.1\.1\s+.*'
+    state: absent
+  when: common_hostname | length > 0
+
+- name: Add authorized SSH keys
+  ansible.posix.authorized_key:
+    user: "{{ common_ssh_user }}"
+    state: present
+    key: "{{ item }}"
+  loop: "{{ common_authorized_keys }}"

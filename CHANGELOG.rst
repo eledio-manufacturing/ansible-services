@@ -5,7 +5,11 @@ eledio.services Change Log
 Unreleased
 ----------
 
-No changes yet.
+Changes
+-------
+- common: optional host bootstrap, all off by default — ``common_upgrade_packages`` (full dist-upgrade), ``common_hostname`` (also drops the stale ``127.0.1.1`` line from ``/etc/hosts``) and ``common_authorized_keys`` / ``common_ssh_user``. Prints host facts at the start (``common_show_host_facts``, default on).
+- install_uv: ``install_uv_min_version`` upgrades an installed uv older than the given version. Empty (default) keeps the old behaviour of never touching an existing binary.
+- Add ``ansible.posix`` (>=1.5.0) as a collection dependency, for ``common_authorized_keys``.
 
 
 v1.1.7

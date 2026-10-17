@@ -7,7 +7,7 @@ Collection of roles for deploying and managing services on Debian-based systems
 
 | Role | Description |
 |---|---|
-| `eledio.services.common` | Base system setup — apt update and essential packages |
+| `eledio.services.common` | Base system setup — apt update and essential packages, optional host bootstrap |
 | `eledio.services.install_uv` | Install [uv](https://github.com/astral-sh/uv) Python package manager system-wide |
 | `eledio.services.vpn` | Install OpenVPN and deploy client configuration |
 | `eledio.services.st_link` | Deploy ST-Link udev rules for USB access |
@@ -67,12 +67,18 @@ ansible-galaxy collection install eledio-services-*.tar.gz
 | Variable | Default | Description |
 |---|---|---|
 | `common_packages` | see defaults | List of apt packages to install — extend per playbook |
+| `common_show_host_facts` | `true` | Print hostname, IP, distro and kernel |
+| `common_upgrade_packages` | `false` | Run a full `apt dist-upgrade` |
+| `common_hostname` | `""` | Hostname to set (empty = leave as is) |
+| `common_ssh_user` | `ansible_user`, else `pi` | Account to add `common_authorized_keys` to |
+| `common_authorized_keys` | `[]` | SSH public keys to authorize |
 
 ### install_uv
 
 | Variable | Default | Description |
 |---|---|---|
 | `install_uv_install_dir` | `/usr/local/bin` | Directory to install uv binary into |
+| `install_uv_min_version` | `""` | Upgrade an installed uv older than this; empty = never upgrade |
 
 ### vpn
 

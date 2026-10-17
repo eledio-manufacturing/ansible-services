@@ -1,2 +1,8 @@
 ---
 install_uv_install_dir: /usr/local/bin
+
+# Minimum acceptable uv version, e.g. "0.5.0". When set, an installed uv
+# older than this is upgraded in place — useful because a uv.lock written
+# by a newer uv can't be read by an older one. Empty keeps the original
+# behaviour: install only when no uv binary is present.
+install_uv_min_version: ""

@@ -8,3 +8,19 @@ common_packages:
   - curl
   - cifs-utils
   - libnss-myhostname
+
+# Print hostname, IP, distro and kernel at the start of the role.
+common_show_host_facts: true
+
+# Opt-in full `apt dist-upgrade` — slow, and pulls in unrelated changes on
+# every run, so something to enable deliberately rather than by default.
+common_upgrade_packages: false
+
+# First-time bootstrap of a freshly imaged host — hostname to set, or leave
+# empty to skip (most hosts already have the hostname they need).
+common_hostname: ""
+
+# SSH public keys to authorize for common_ssh_user — the login account
+# (e.g. "pi"), not a service's nologin account.
+common_ssh_user: "{{ ansible_user | default('pi') }}"
+common_authorized_keys: []

@@ -4,24 +4,48 @@
     path: "{{ install_uv_install_dir }}/uv"
   register: install_uv_binary
 
+- name: Check the installed uv version
+  ansible.builtin.command: "{{ install_uv_install_dir }}/uv --version"
+  register: install_uv_version
+  changed_when: false
+  failed_when: false
+  when:
+    - install_uv_binary.stat.exists
+    - install_uv_min_version | length > 0
+
+- name: Decide whether uv needs installing or upgrading
+  ansible.builtin.set_fact:
+    install_uv_needed: >-
+      {{
+        not install_uv_binary.stat.exists
+        or (
+          install_uv_min_version | length > 0
+          and (
+            install_uv_version.rc != 0
+            or install_uv_version.stdout.split(' ')[1] is version(install_uv_min_version, '<')
+          )
+        )
+      }}
+
 - name: Download uv installer
   ansible.builtin.get_url:
     url: https://astral.sh/uv/install.sh
     dest: /tmp/uv-install.sh
     mode: '0755'
-  when: not install_uv_binary.stat.exists
+  when: install_uv_needed | bool
 
 - name: Install uv
+  # No `creates:` guard — it would skip upgrading an existing, too-old
+  # binary. install_uv_needed already covers the "nothing to do" case.
   ansible.builtin.command: /tmp/uv-install.sh
-  args:
-    creates: "{{ install_uv_install_dir }}/uv"
   environment:
     INSTALLER_NO_MODIFY_PATH: "1"
     UV_INSTALL_DIR: "{{ install_uv_install_dir }}"
-  when: not install_uv_binary.stat.exists
+  changed_when: true
+  when: install_uv_needed | bool
 
 - name: Remove uv installer
   ansible.builtin.file:
     path: /tmp/uv-install.sh
     state: absent
-  when: not install_uv_binary.stat.exists
+  when: install_uv_needed | bool

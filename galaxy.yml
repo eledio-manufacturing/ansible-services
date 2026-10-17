@@ -16,7 +16,9 @@ tags:
   - linux
   - tools
 
-dependencies: {}
+dependencies:
+  # common: authorized_key
+  ansible.posix: ">=1.5.0"
 
 repository: https://github.com/eledio-manufacturing/ansible-services.git
 homepage: https://eledio-manufacturing.github.io/ansible-services/

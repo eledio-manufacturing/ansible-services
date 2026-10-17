@@ -5,6 +5,16 @@ eledio.services Change Log
 Unreleased
 ----------
 
+No changes yet.
+
+
+v1.1.8
+======
+
+Release Summary
+---------------
+Optional host bootstrap in ``common`` and minimum-version upgrades in ``install_uv``.
+
 Changes
 -------
 - common: optional host bootstrap, all off by default — ``common_upgrade_packages`` (full dist-upgrade), ``common_hostname`` (also drops the stale ``127.0.1.1`` line from ``/etc/hosts``) and ``common_authorized_keys`` / ``common_ssh_user``. Prints host facts at the start (``common_show_host_facts``, default on).

@@ -623,7 +623,7 @@
 
 <h1 id="role-install_uv">Role: install_uv</h1>
 <p>Purpose</p>
-<p>Installs the <code>uv</code> Python package manager system-wide. The role skips installation when the <code>uv</code> binary is already present.</p>
+<p>Installs the <code>uv</code> Python package manager system-wide. The role skips installation when the <code>uv</code> binary is already present, unless it is older than <code>install_uv_min_version</code>.</p>
 <p>Variables</p>
 <table>
 <thead>
@@ -638,6 +638,11 @@
 <td><code>install_uv_install_dir</code></td>
 <td><code>/usr/local/bin</code></td>
 <td>Directory to install the <code>uv</code> binary into</td>
+</tr>
+<tr>
+<td><code>install_uv_min_version</code></td>
+<td><code>""</code></td>
+<td>Upgrade an installed <code>uv</code> older than this (e.g. <code>"0.5.0"</code>). Empty = never upgrade an existing binary</td>
 </tr>
 </tbody>
 </table>

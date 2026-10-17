@@ -624,6 +624,7 @@
 <h1 id="role-common">Role: common</h1>
 <p>Purpose</p>
 <p>Base system setup. Updates apt cache and installs essential packages. Run this role first in any playbook.</p>
+<p>Optionally also bootstraps a freshly imaged host: full dist-upgrade, hostname, and authorized SSH keys. All of these are off by default.</p>
 <p>Variables</p>
 <table>
 <thead>
@@ -638,6 +639,31 @@
 <td><code>common_packages</code></td>
 <td>See defaults</td>
 <td>List of apt packages to install</td>
+</tr>
+<tr>
+<td><code>common_show_host_facts</code></td>
+<td><code>true</code></td>
+<td>Print hostname, IP, distro and kernel at the start of the role</td>
+</tr>
+<tr>
+<td><code>common_upgrade_packages</code></td>
+<td><code>false</code></td>
+<td>Run a full <code>apt dist-upgrade</code></td>
+</tr>
+<tr>
+<td><code>common_hostname</code></td>
+<td><code>""</code></td>
+<td>Hostname to set (empty = leave as is). Also removes the stale <code>127.0.1.1</code> line from <code>/etc/hosts</code></td>
+</tr>
+<tr>
+<td><code>common_ssh_user</code></td>
+<td><code>ansible_user</code>, else <code>pi</code></td>
+<td>Account to add <code>common_authorized_keys</code> to</td>
+</tr>
+<tr>
+<td><code>common_authorized_keys</code></td>
+<td><code>[]</code></td>
+<td>SSH public keys to authorize for <code>common_ssh_user</code> (uses <code>ansible.posix.authorized_key</code>)</td>
 </tr>
 </tbody>
 </table>
